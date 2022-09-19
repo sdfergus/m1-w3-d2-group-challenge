@@ -9,8 +9,9 @@
     <style>
         #menu {
             border: 1px solid #000;
-            width: 490px;
-            padding: 2px;
+            width: -moz-fit-content;
+            width: fit-content;
+            padding: 0 10px 0 2px;
         }
 
         .yellow-highlight {
@@ -24,7 +25,7 @@
 </head>
 <body>
     <div id="menu">
-        <h1>You should cook <span class="yellow-highlight">Lunch</span>. It's <span class="red-highlight">3 PM</span></h1>
+        <!-- <h1>You should cook <span class="yellow-highlight">Lunch</span>. It's <span class="red-highlight">3 PM</span></h1> -->
         <h3>Breakfast Recipe</h3>
         <ol>
             <li>Prepare eggs</li>
@@ -52,7 +53,32 @@
     </div>
 
     <script>
+        var menuDiv = document.getElementById('menu');
+        var time = new Date().toLocaleTimeString([],{hour:'numeric', minute:'numeric', hour12:true});
+        // var hour = time.getHours();
         
+        // console.log(time);
+        // console.log("toDate STRING:", time.toDateString());
+        // console.log("toTime STRING:", time.toTimeString());
+        
+        // const options1 = { hour: '2-digit', hour12: true };
+        // console.log("To Locale Time String:", time.toLocaleTimeString('en-US', options1));
+        
+        // const options2 = { hour: 'numeric', hour12: true };
+        // console.log("To Locale Time String:", time.toLocaleTimeString('en-US', options2));
+        // console.log(time.toLocaleTimeString('en-US',{hour:'numeric',hour12:true}));
+
+        // console.log("CURRENT TIME: ", time);
+        var hour = parseInt(time.split(" ")[0]);
+
+        if(hour < 12 && time.includes("AM")) {
+            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Breakfast</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
+        } else if (hour >= 12 && time.includes("PM")) {
+            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Lunch</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";            
+        } else {
+            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Dinner</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";  
+        }  
+
     </script>
 </body>
 </html>
