@@ -26,6 +26,7 @@
 <body>
     <div id="menu">
         <!-- <h1>You should cook <span class="yellow-highlight">Lunch</span>. It's <span class="red-highlight">3 PM</span></h1> -->
+        <div></div>
         <h3>Breakfast Recipe</h3>
         <ol>
             <li>Prepare eggs</li>
@@ -70,10 +71,11 @@
 
         // console.log("CURRENT TIME: ", time);
         var hour = parseInt(time.split(" ")[0]);
+        // console.log("HOUR: ", hour);
 
         if(hour < 12 && time.includes("AM")) {
             menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Breakfast</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
-        } else if (hour >= 12 && time.includes("PM")) {
+        } else if (hour >= 12 && time.includes("PM") || hour <= 6 && time.includes("PM")) {
             menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Lunch</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";            
         } else {
             menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Dinner</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";  
