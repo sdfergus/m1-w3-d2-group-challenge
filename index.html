@@ -25,9 +25,10 @@
 </head>
 <body>
     <div id="menu">
+        <div id="heading"></div>
+        <div id="menu-list"></div>
         <!-- <h1>You should cook <span class="yellow-highlight">Lunch</span>. It's <span class="red-highlight">3 PM</span></h1> -->
-        <div></div>
-        <h3>Breakfast Recipe</h3>
+        <!-- <h3>Breakfast Recipe</h3>
         <ol>
             <li>Prepare eggs</li>
             <li>Heat pan</li>
@@ -50,12 +51,35 @@
             <li>Prepare salad</li>
             <li>Add seasonings and dressing on salad and toss</li>
             <li>Transfer salmon and salad on plate</li>
-        </ol>
+        </ol> -->
     </div>
 
     <script>
-        var menuDiv = document.getElementById('menu');
+        // var menuDiv = document.getElementById('menu');
+        var heading = document.getElementById('heading');
+        var menuList = document.getElementById('menu-list');
+        var recipes = ["<h3>Breakfast Recipe</h3>","<ol>","<li>Prepare eggs</li>","<li>Heat pan</li>","<li>Cook sausages</li>","<li>Cook eggs to liking</li>","<li>Transfer all on a plate and serve</li>","</ol>","<h3>Lunch Recipe</h3>","<ol>","<li>Prepare burger patty</li>","<li>Grill patty on medium heat</li>","<li>Toast bun while grilling meat</li>","<li>Prepare toppings</li>","<li>Assemble ingredients into hamburger when done</li>","</ol>","<h3>Dinner Recipe</h3>","<ol>","<li>Season salmon meat</li>","<li>Cook salmon on skillet in medium heat for 5 minutes each side</li>","<li>Prepare salad</li>","<li>Add seasonings and dressing on salad and toss</li>","<li>Transfer salmon and salad on plate</li>","</ol>"];
+
         var time = new Date().toLocaleTimeString([],{hour:'numeric', minute:'numeric', hour12:true});
+
+        var hour = parseInt(time.split(" ")[0]);
+
+        if(time === "12 AM" || hour < 12 && time.includes("AM")) {
+            heading.innerHTML = "<h1>You should cook <span class='yellow-highlight'>Breakfast</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
+            // menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Breakfast</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
+        } else if (hour >= 12 && time.includes("PM") || hour < 6 && time.includes("PM")) {
+            heading.innerHTML = "<h1>You should cook <span class='yellow-highlight'>Lunch</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";            
+            // menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Lunch</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
+        } else {
+            heading.innerHTML = "<h1>You should cook <span class='yellow-highlight'>Dinner</span>. It's <span class='red-highlight'>"+ time +"</span></h1>"; 
+            // menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Dinner</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";  
+        }  
+
+        // Prints all recipes on screen
+        for(let i = 0; i < recipes.length; i++) {
+            menuList.innerHTML = recipes.join(" ");
+        }
+
         // var hour = time.getHours();
         
         // console.log(time);
@@ -70,17 +94,7 @@
         // console.log(time.toLocaleTimeString('en-US',{hour:'numeric',hour12:true}));
 
         // console.log("CURRENT TIME: ", time);
-        var hour = parseInt(time.split(" ")[0]);
         // console.log("HOUR: ", hour);
-
-        if(hour < 12 && time.includes("AM")) {
-            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Breakfast</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";
-        } else if (hour >= 12 && time.includes("PM") || hour <= 6 && time.includes("PM")) {
-            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Lunch</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";            
-        } else {
-            menuDiv.children[0].innerHTML = "<h1>You should cook <span class='yellow-highlight'>Dinner</span>. It's <span class='red-highlight'>"+ time +"</span></h1>";  
-        }  
-
     </script>
 </body>
 </html>
